@@ -1,11 +1,19 @@
 #include <stdio.h>
-#include <conio.h>
+#include <string.h>
 
-int readFile(const char* fileName, char contents[]) {
+void readFile(const char* fileName, char contents[]) {
 	FILE *file;
 	file = fopen(fileName, "r");
+	char buffer = 0;
+	int i = 0;
 
-	fgets(contents, 256, file);
+    while ((buffer = fgetc(file)) != EOF) {
+        if (i == 65000)
+            break;
 
-	return 0;
+        contents[i] = buffer;
+        i++;
+    }
+
+	return;
 }
