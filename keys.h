@@ -1,7 +1,7 @@
 #ifndef KEYS_H_INCLUDED
 #define KEYS_H_INCLUDED
 
-int matching_closing_key(int);
-int matching_opening_key(int);
+long matching_closing_key(const long, const char*);
+long matching_opening_key(const long, const char*);
 
 #endif // KEYS_H_INCLUDED
