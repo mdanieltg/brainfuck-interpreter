@@ -1,43 +1,45 @@
 #include <stdio.h>
 #include <string.h>
-#include "keys.h"
+#include "keys.h"   // Declaration of matching functions
 
-#define MAX_SIZE_ARRAY 65000
+#define MAX_SIZE_ARRAY 65000    // Max file size to manage
 
 long syntax_check(const char*);
 void readFile(const char*, char[]);
 
 int main() {
 	char fileName[512] = "";
-	char source[MAX_SIZE_ARRAY] = {0};
-	char array[MAX_SIZE_ARRAY] = {0};
-	char *ptr = array;
+	char source[MAX_SIZE_ARRAY] = {0};      // Source code file
+	char array[MAX_SIZE_ARRAY] = {0};       // Array to work with bytes
+	char *ptr = array;                      // Pointer to the Array
 	char car = 0;
 	long i = 0;
 	char output[MAX_SIZE_ARRAY] = {0};
 
+    // Warning and file name obtaining
     printf("ATENCION: Solo se soportan archivos de menos de 65000 bytes.\n");
     printf("Ruta del archivo de codigo fuente: ");
     gets(fileName);
 
-    if (strlen(fileName) == 0) {
+    if (strlen(fileName) == 0) {            // No file name was provided
         puts("\n\tERROR: No se proporciono ruta.");
-    } else {
-        readFile(fileName, source);
+    } else {                                // File name was provided
+        readFile(fileName, source);         // Truncate contents of source code file into array source
 
-        if (strlen(source) != 0) {
+        if (strlen(source) != 0) {          // Array not empty
             int synCode = 0;
-            synCode = syntax_check(source);
+            synCode = syntax_check(source); // Store result of the syntax check
 
-            if (synCode != 0) {
+            if (synCode != 0) {             // Syntax error
                 puts("\n\tERROR: Error de sintaxis.");
 
-                if (synCode < 0) {
+                if (synCode < 0) {          // Found single opening key
                     printf("\t\tHay una llave sin cerrar en la posicion %d.\n\n", (-1 * synCode));
-                } else {
+                } else {                    // Found single closing key
                     printf("\t\tHay una llave sin abrir en la posicion %d.\n\n", synCode);
                 }
-            } else {
+            } else {                        // No error found
+                // Iterate through the contents of the source code
                 while (i < MAX_SIZE_ARRAY) {
                     car = source[i];
 
@@ -82,7 +84,7 @@ int main() {
 
                 printf("Resultado: %s\n", output);
             }
-        } else {
+        } else {                            // No contents / file empty
             puts("\n\tERROR: No se pudo leer el archivo o no tenia contenidos.");
         }
     }

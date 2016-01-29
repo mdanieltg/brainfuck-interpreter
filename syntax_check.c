@@ -8,7 +8,7 @@ long syntax_check(const char *str) {
     while (i < strlen(str)) {
         if (str[i] == '[')
             if (matching_closing_key(i, str) == -1)
-                return (-1 * (i + 1));
+                return (-1 * (i + 1));      // Return non-zero based position, negative for single opening brackets
 
         i++;
     }
@@ -18,13 +18,10 @@ long syntax_check(const char *str) {
     while (i < strlen(str)) {
         if (str[i] == ']')
             if (matching_opening_key(i, str) == -1)
-                return (i + 1);
+                return (i + 1);             // Return non-zero based position, positive for single closing brackets
 
         i++;
     }
 
-    // Negativos para apertura
-    // Positivos para cierre
-    // Cero para correcto
-    return 0;
+    return 0;                               // Return zero for no errors found.
 }
