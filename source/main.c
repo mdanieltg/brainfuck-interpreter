@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "keys.h"   // Declaration of matching functions
 
 #define MAX_SIZE_ARRAY 65000    // Max file size to manage
@@ -7,7 +8,10 @@
 long syntax_check(const char*);
 void readFile(const char*, char[]);
 
-int main() {
+int main(int argc, char* argv[]) {
+    if (argc != 2)
+        exit(21);
+
 	char fileName[512] = "";
 	char source[MAX_SIZE_ARRAY] = {0};      // Source code file
 	char array[MAX_SIZE_ARRAY] = {0};       // Array to work with bytes
@@ -16,10 +20,8 @@ int main() {
 	long i = 0;
 	char output[MAX_SIZE_ARRAY] = {0};
 
-    // Warning and file name obtaining
-    printf("ATENCION: Solo se soportan archivos de menos de 65000 bytes.\n");
-    printf("Ruta del archivo de codigo fuente: ");
-    gets(fileName);
+    // Identify arguments
+    strcpy(fileName, argv[1]);
 
     if (strlen(fileName) == 0) {            // No file name was provided
         puts("\n\tERROR: No se proporciono ruta.");
