@@ -1,6 +1,6 @@
 #ifndef _FILES_H
 #define _FILES_H
 
-void readFile(const char*, char[]);
+void readFile(const char* fileName, char contents[]);
 
-#endif
+#endif _FILES_H
