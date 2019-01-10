@@ -18,12 +18,12 @@ int main(int argc, char* argv[])
     }
 
     char fileName[512] = "";
-    char source[MAX_SIZE_ARRAY] = {0};      // Source code file
-    char array[MAX_SIZE_ARRAY] = {0};       // Array to work with bytes
+    char source[MAX_SIZE_ARRAY] = { };      // Source code file
+    char array[MAX_SIZE_ARRAY] = { };       // Array to work with bytes
     char *ptr = array;                      // Pointer to the Array
     char car = 0;
     long i = 0;
-    char output[MAX_SIZE_ARRAY] = {0};
+    char output[MAX_SIZE_ARRAY] = { };
 
     // Identify arguments
     strcpy(fileName, argv[1]);
