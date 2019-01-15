@@ -1,7 +1,7 @@
 #include <string.h>
-#include "keys.h"
+#include "brackets.h"
 
-long matching_opening_key(const long at, const char* code)
+long matching_opening_bracket(const long at, const char* code)
 {
     long open = 0, closed = 0;
 
@@ -19,7 +19,7 @@ long matching_opening_key(const long at, const char* code)
     return -1;
 }
 
-long matching_closing_key(const long at, const char* code)
+long matching_closing_bracket(const long at, const char* code)
 {
     unsigned int length = strlen(code);
     long open = 0, closed = 0;
