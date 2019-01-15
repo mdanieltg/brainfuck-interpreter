@@ -1,22 +1,24 @@
 #include <stdio.h>
-//#include <string.h>
 #include "files.h"
 
-void readFile(const char* fileName, char contents[])
+int read_file(const char* filename, char contents[])
 {
-    FILE *file;
-    file = fopen(fileName, "r");
     char buffer;
     int i = 0;
 
-    while ((buffer = fgetc(file)) != EOF)
-    {
-        if (i == 65000)
-            break;
+    FILE* file = fopen(filename, "r");
+    if (file == NULL)
+        return 1;
 
-        contents[i] = buffer;
-        i++;
-    }
+    while ((buffer = fgetc(file)) != EOF &&
+        i <= 65000)
+        if (buffer == '+' || buffer == '-' ||
+            buffer == '>' || buffer == '<' ||
+            buffer == ',' || buffer == '.' ||
+            buffer == '[' || buffer == '[')
+            contents[i++] = buffer;
 
-    return;
+    fclose(file);
+
+    return 0;
 }

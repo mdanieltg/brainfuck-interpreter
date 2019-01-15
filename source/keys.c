@@ -1,59 +1,38 @@
 #include <string.h>
 #include "keys.h"
 
-long matching_closing_key(const long at, const char* code)
+long matching_opening_key(const long at, const char* code)
 {
-    long open = 0;
-    long closed = 0;
-    long pos = 0;
+    long open = 0, closed = 0;
 
-    pos = at;
-
-    while (pos < strlen(code))
+    for (long pos = at; pos >= 0; pos--)
     {
-        switch (code[pos])
-        {
-            case '[':
-                open++;
-                break;
-            case ']':
-                closed++;
-                break;
-        }
+        if (code[pos] == '[')
+            open++;
+        else if (code[pos] == ']')
+            closed++;
 
         if (open == closed)
             return pos;
-
-        pos++;
     }
 
     return -1;
 }
 
-long matching_opening_key(const long at, const char* code)
+long matching_closing_key(const long at, const char* code)
 {
-    long open = 0;
-    long closed = 0;
-    long pos = 0;
+    unsigned int length = strlen(code);
+    long open = 0, closed = 0;
 
-    pos = at;
-
-    while (pos >= 0)
+    for (long pos = at; pos < length; pos++)
     {
-        switch (code[pos])
-        {
-            case '[':
-                open++;
-                break;
-            case ']':
-                closed++;
-                break;
-        }
+        if (code[pos] == '[')
+            open++;
+        else if (code[pos] == ']')
+            closed++;
 
         if (open == closed)
             return pos;
-
-        pos--;
     }
 
     return -1;

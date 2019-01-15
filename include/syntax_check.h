@@ -3,4 +3,4 @@
 
 long syntax_check(const char* str);
 
-#endif _SYNTAX_CHECK_H
+#endif // _SYNTAX_CHECK_H
