@@ -16,27 +16,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <stdio.h>
-#include "files.h"
+#ifndef _BRACKETS_H
+#define _BRACKETS_H
 
-int read_file(const char* filename, char contents[])
-{
-    char buffer;
-    int i = 0;
+long matching_opening_bracket(const long at, const char* code);
+long matching_closing_bracket(const long at, const char* code);
 
-    FILE* file = fopen(filename, "r");
-    if (file == NULL)
-        return 1;
-
-    while ((buffer = fgetc(file)) != EOF &&
-        i <= 65000)
-        if (buffer == '+' || buffer == '-' ||
-            buffer == '>' || buffer == '<' ||
-            buffer == ',' || buffer == '.' ||
-            buffer == '[' || buffer == '[')
-            contents[i++] = buffer;
-
-    fclose(file);
-
-    return 0;
-}
+#endif // _BRACKETS_H

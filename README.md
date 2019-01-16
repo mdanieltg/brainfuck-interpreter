@@ -1,2 +1,2 @@
-# Brainfuck Interpreter _(written in C)_
-Implementation in C of a Brainfuck interpreter
+# Brainfuck Interpreter
+Implementation in C of an interpreter for the [Brainfuck language](https://en.wikipedia.org/wiki/Brainfuck).

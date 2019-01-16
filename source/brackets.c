@@ -16,27 +16,42 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <stdio.h>
-#include "files.h"
+#include <string.h>
+#include "brackets.h"
 
-int read_file(const char* filename, char contents[])
+long matching_opening_bracket(const long at, const char* code)
 {
-    char buffer;
-    int i = 0;
+    long open = 0, closed = 0;
 
-    FILE* file = fopen(filename, "r");
-    if (file == NULL)
-        return 1;
+    for (long pos = at; pos >= 0; pos--)
+    {
+        if (code[pos] == '[')
+            open++;
+        else if (code[pos] == ']')
+            closed++;
 
-    while ((buffer = fgetc(file)) != EOF &&
-        i <= 65000)
-        if (buffer == '+' || buffer == '-' ||
-            buffer == '>' || buffer == '<' ||
-            buffer == ',' || buffer == '.' ||
-            buffer == '[' || buffer == '[')
-            contents[i++] = buffer;
+        if (open == closed)
+            return pos;
+    }
 
-    fclose(file);
+    return -1;
+}
 
-    return 0;
+long matching_closing_bracket(const long at, const char* code)
+{
+    unsigned int length = strlen(code);
+    long open = 0, closed = 0;
+
+    for (long pos = at; pos < length; pos++)
+    {
+        if (code[pos] == '[')
+            open++;
+        else if (code[pos] == ']')
+            closed++;
+
+        if (open == closed)
+            return pos;
+    }
+
+    return -1;
 }

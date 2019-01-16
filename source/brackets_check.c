@@ -16,27 +16,28 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <stdio.h>
-#include "files.h"
+#include <string.h>
+#include "brackets_check.h"
+#include "brackets.h"
 
-int read_file(const char* filename, char contents[])
+long brackets_check(const char* str)
 {
-    char buffer;
-    int i = 0;
+    unsigned int length = strlen(str);
 
-    FILE* file = fopen(filename, "r");
-    if (file == NULL)
-        return 1;
+    // Check single-opening brackets
+    for (long i = 0; i < length; i++)
+        if (str[i] == '[')
+            if (matching_closing_bracket(i, str) == -1)
+                // Return non-zero based position, negative for single opening brackets
+                return -1 * (i + 1);
 
-    while ((buffer = fgetc(file)) != EOF &&
-        i <= 65000)
-        if (buffer == '+' || buffer == '-' ||
-            buffer == '>' || buffer == '<' ||
-            buffer == ',' || buffer == '.' ||
-            buffer == '[' || buffer == '[')
-            contents[i++] = buffer;
+    // Check single-closing brackets
+    for (long i = 0; i < length; i++)
+        if (str[i] == ']')
+            if (matching_opening_bracket(i, str) == -1)
+                // Return non-zero based position, positive for single closing brackets
+                return i + 1;
 
-    fclose(file);
-
+    // Return zero for no errors found
     return 0;
 }
