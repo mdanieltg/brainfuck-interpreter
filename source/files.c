@@ -30,7 +30,11 @@ int read_file(const char* filename, char contents[])
 
     while ((buffer = fgetc(file)) != EOF &&
         i <= 65000)
-        contents[i++] = buffer;
+        if (buffer == '+' || buffer == '-' ||
+            buffer == '>' || buffer == '<' ||
+            buffer == ',' || buffer == '.' ||
+            buffer == '[' || buffer == ']')
+            contents[i++] = buffer;
 
     fclose(file);
 
