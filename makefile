@@ -26,5 +26,5 @@ files.o: source/files.c include/files.h
 clean:
 	$(RM) $(OBJS)
 
-distclean: clean
+clear: clean
 	$(RM) $(EXE)
