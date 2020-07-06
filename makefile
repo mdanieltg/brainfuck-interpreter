@@ -4,7 +4,7 @@ CPPFLAGS=-Wall -Iinclude
 LDFLAGS=
 
 OBJS=files.o brackets.o brackets_check.o main.o
-EXE=bfi.exe
+EXE=bfi
 
 all: $(EXE)
 
